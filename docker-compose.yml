@@ -1,0 +1,20 @@
+version: '3'
+services:
+  vite:
+    build: 
+      context: .
+      dockerfile: Dockerfile.vite
+    command: npm run dev
+    volumes:
+      - ./src:/usr/src/app/src
+    ports:
+      - "5173:5173"
+  http:
+    build:
+      context: .
+      dockerfile: Dockerfile.http
+    command: npm run http
+    volumes:
+      - ./src:/usr/src/app/src
+    ports:
+      - "3000:3000"

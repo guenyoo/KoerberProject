@@ -5,7 +5,7 @@ const PORT = 3000;
 const server = http.createServer((req, res) => {
   res.writeHead(200, {'Content-Type': 'text/plain'});
   console.log(req.headers['user-agent']);
-  res.end('Hello, TS HTTP Server\n');
+  res.end('Hello, Docker TS HTTP Server\n');
 })
 
 server.listen(PORT, () => {
