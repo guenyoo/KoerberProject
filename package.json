@@ -14,7 +14,8 @@
     "docker:build:all": "npm run docker:build:http && npm run docker:build:vite",
     "docker:run:http": "docker run -p 3000:3000 -d http",
     "docker:run:vite": "docker run -p 5173:5173 -d vite",
-    "docker:run:all": "npm run docker:run:http && npm run docker:run:vite"
+    "docker:run:all": "npm run docker:run:http && npm run docker:run:vite",
+    "test": "vitest"
   },
   "dependencies": {
     "@types/node": "^20.8.7",
@@ -23,12 +24,12 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react-swc": "^3.3.2",
-    "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "prettier": "^3.0.3",
@@ -36,6 +37,6 @@
     "tsx": "^3.14.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.5",
-    "vite-tsconfig-paths": "^4.2.1"
+    "vitest": "^0.34.6"
   }
 }
