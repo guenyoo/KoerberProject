@@ -4,7 +4,7 @@ import App from '@/App';
 
 describe('App', () => {
   it('renders headline', () => {
-    render(<App title="React" />);
+    render(<App />);
 
     screen.debug();
 
