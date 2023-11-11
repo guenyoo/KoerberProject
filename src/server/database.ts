@@ -1,20 +1,12 @@
-import mysql from 'mysql';
+import mysql from 'mysql2';
 
-const mysqlConnection = mysql.createConnection({
+const pool = mysql.createPool({
   host: 'localhost',
-  user: 'root',
-  // password: '',
+  user: 'root', // Create a real user instead of root
+  // password: '', // And give that real user a real password
   database: 'devices',
 });
 
-mysqlConnection.connect();
+const endConnection = () => pool.end();
 
-mysqlConnection.query('SELECT 1 + 1 AS solution', (err, rows /* , fields */) => {
-  if (err) throw err;
-
-  console.log('The solution is: ', rows[0].solution);
-});
-
-mysqlConnection.end();
-
-export { mysqlConnection };
+export { pool, endConnection };
