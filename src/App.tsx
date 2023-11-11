@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <Headline type="h1" content="Device Manager" className="text-3xl font-bold" />
-      <Devices />
+      <Devices className="my-3" />
       <AddDevice />
     </>
   );
