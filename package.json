@@ -34,7 +34,7 @@
     "@vitejs/plugin-react-swc": "^3.3.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "mysql": "^2.18.1",
+    "mysql2": "^3.6.3",
     "prettier": "^3.0.3",
     "ts-node": "^10.9.1",
     "tsx": "^3.14.0",
