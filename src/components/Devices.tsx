@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { useEffect, useState } from 'react';
 import { Headline } from './Headline';
 
-const Device = z.object({
+const DeviceSchema = z.object({
   id: z.number(),
   deviceName: z.string(),
   deviceType: z.union([z.literal('Smartphone'), z.literal('Tablet'), z.literal('Camera')]),
@@ -10,7 +10,7 @@ const Device = z.object({
   batteryStatus: z.number().min(0).max(100),
 });
 
-type Device = z.infer<typeof Device>;
+type Device = z.infer<typeof DeviceSchema>;
 
 interface DevicesProps {
   className?: string;
@@ -46,4 +46,4 @@ const Devices = ({ className }: DevicesProps) => {
   );
 };
 
-export { Devices };
+export { Devices, DeviceSchema, type Device };
