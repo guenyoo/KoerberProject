@@ -1,14 +1,27 @@
 version: '3'
 services:
   vite:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile.vite
     command: npm run dev
     volumes:
       - ./src:/usr/src/app/src
     ports:
-      - "5173:5173"
+      - '5173:5173'
+  db:
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=devices
+      - MYSQL_ROOT_PASSWORD=
+    ports:
+      - '3306:3306'
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
   http:
     build:
       context: .
@@ -17,4 +30,7 @@ services:
     volumes:
       - ./src:/usr/src/app/src
     ports:
-      - "3000:3000"
+      - '3000:3000'
+volumes:
+  db:
+    driver: local
