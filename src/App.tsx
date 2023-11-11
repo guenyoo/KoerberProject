@@ -8,7 +8,7 @@ import { Devices } from './components/Devices';
 function App() {
   return (
     <>
-      <Headline type="h1" content="Device Manager" />
+      <Headline type="h1" content="Device Manager" className="text-3xl font-bold" />
       <Devices />
     </>
   );
