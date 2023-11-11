@@ -1,15 +1,22 @@
+import { z } from 'zod';
 import { useEffect, useState } from 'react';
 import { Headline } from './Headline';
 
-interface Device {
-  id: number;
-  deviceName: string;
-  deviceType: 'Smartphone' | 'Tablet' | 'Camera';
-  ownerName: string;
-  batteryStatus: number;
+const Device = z.object({
+  id: z.number(),
+  deviceName: z.string(),
+  deviceType: z.union([z.literal('Smartphone'), z.literal('Tablet'), z.literal('Camera')]),
+  ownerName: z.string(),
+  batteryStatus: z.number().min(0).max(100),
+});
+
+type Device = z.infer<typeof Device>;
+
+interface DevicesProps {
+  className?: string;
 }
 
-const Devices = () => {
+const Devices = ({ className }: DevicesProps) => {
   const [devices, setDevices] = useState<Device[]>([]);
 
   useEffect(() => {
@@ -21,7 +28,7 @@ const Devices = () => {
   }, []);
 
   return (
-    <>
+    <div className={className}>
       <Headline type="h2" content="Existing Devices" />
       <ul className="list-none">
         {devices.map((device) => (
@@ -35,7 +42,7 @@ const Devices = () => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 
