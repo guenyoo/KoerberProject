@@ -23,10 +23,15 @@ const Devices = () => {
   return (
     <>
       <Headline type="h2" content="Existing Devices" />
-      <ul>
+      <ul className="list-none">
         {devices.map((device) => (
-          <li key={device.id}>
-            Device Name: <b>{device.deviceName}</b>, BatteryStatus: <b>{device.batteryStatus} %</b>,
+          <li className="text-left bg-slate-100 rounded-xl p-8 dark:bg-slate-800 shadow-lg" key={device.id}>
+            <div>
+              Device Name: <b>{device.deviceName}</b>
+            </div>
+            <div>
+              BatteryStatus: <b>{device.batteryStatus} %</b>
+            </div>
           </li>
         ))}
       </ul>
