@@ -2,19 +2,26 @@ import { ZodError } from 'zod';
 import { useEffect, useState } from 'react';
 import { Headline } from './Headline';
 import { createRandomName } from '@/helpers/create-random-name';
-import { DeviceSchema } from './Devices';
+import { type Device, DeviceSchema } from './Devices';
 import { devicesStore } from '@/stores/devices-store';
 import { Note } from './Note';
 import he from 'he';
 
-const AddDevice = () => {
-  const [deviceType, setDeviceType] = useState<string>('Smartphone');
+interface AddOrEditDeviceProps {
+  type: 'add' | 'edit';
+  device?: Device;
+}
+
+const AddOrEditDevice = ({ type, device }: AddOrEditDeviceProps) => {
+  const [deviceType, setDeviceType] = useState<string>(device?.deviceType || 'Smartphone');
   const generatedRandomName = createRandomName();
-  const [deviceName, setDeviceName] = useState<string>(generatedRandomName);
-  const [ownerName, setOwnerName] = useState<string>('');
-  const [batteryStatus, setBatteryStatus] = useState<number>(0);
+  const [deviceName, setDeviceName] = useState<string>(device?.deviceName || generatedRandomName);
+  const [ownerName, setOwnerName] = useState<string>(device?.ownerName || '');
+  const [batteryStatus, setBatteryStatus] = useState<number>(device?.batteryStatus || 0);
   const addDevice = devicesStore((state) => state.addDevice);
   const [showNote, setShowNote] = useState(false);
+
+  console.log(device);
 
   const resetInputs = () => {
     setDeviceType('Smartphone');
@@ -63,6 +70,10 @@ const AddDevice = () => {
     }
   };
 
+  const verifyAndEditDevice = () => {
+    console.log('verifyAndEditDevice');
+  };
+
   useEffect(() => {
     // This could be animated nicer with transitions
     if (showNote) {
@@ -75,7 +86,7 @@ const AddDevice = () => {
 
   return (
     <div className="text-left">
-      <Headline type="h2" content="Add Device" className="text-3xl font-bold text-center" />
+      <Headline type="h2" content={`${type} Device`} className="text-3xl font-bold text-center" />
       {/* TODO: Create a Component for input fields and labels */}
       <label htmlFor="deviceName" className="block font-bold">
         Device Name
@@ -131,10 +142,17 @@ const AddDevice = () => {
         onChange={(e) => setBatteryStatus(Number(e.target.value))}
         value={batteryStatus}
       />
-      <button className="bg-green-600 mb-8" onClick={verifyAndSendToDb}>
-        Add Device
-      </button>
-      {showNote && (
+      {type === 'add' && (
+        <button className="bg-green-600 mb-8" onClick={verifyAndSendToDb}>
+          Add Device
+        </button>
+      )}
+      {type === 'edit' && (
+        <button className="bg-yellow-600 mb-8" onClick={verifyAndEditDevice}>
+          Update Device
+        </button>
+      )}
+      {showNote && ( // TODO: Would be nice to add warning and errors here too
         <Note
           className={[
             'w-2/3 text-center center mx-auto transition',
@@ -150,4 +168,4 @@ const AddDevice = () => {
   );
 };
 
-export { AddDevice };
+export { AddOrEditDevice };
