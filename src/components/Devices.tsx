@@ -28,7 +28,15 @@ const Devices = ({ className }: DevicesProps) => {
   };
 
   const handleDeviceDump = (device: Device) => {
-    console.log('handleDeviceDump', device);
+    if (window.confirm('Are you sure you want to Delete this Device?')) {
+      fetch('http://localhost:3000/api/devices/delete', {
+        method: 'DELETE',
+        body: JSON.stringify({ id: device.id }),
+      }).then(() => {
+        // TODO: Cleanup, either get new Devices from Database or filter Store
+        // TODO: Add manual refetch Button
+      });
+    }
   };
 
   // TODO: Implement also filtering for i.e. devices that have no more battery
