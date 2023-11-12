@@ -1,9 +1,17 @@
 import './App.css';
 import { Headline } from '@/components/Headline';
 import { Devices } from './components/Devices';
-import { AddDevice } from './components/AddDevice';
-import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
+import { AddOrEditDevice } from './components/AddOrEditDevice';
+import { BrowserRouter as Router, Route, Routes, NavLink, useParams } from 'react-router-dom';
 import { FileNotFound } from './views/FileNotFound';
+import { devicesStore } from './stores/devices-store';
+
+const EditDevicePage = () => {
+  const devices = devicesStore((state) => state.devices);
+  const { id } = useParams();
+
+  return <AddOrEditDevice type="edit" device={devices.find((device) => device.id === Number(id))} />;
+};
 
 function App() {
   return (
@@ -15,15 +23,25 @@ function App() {
             <ul className="list-none flex flex-wrap gap-2">
               <li>
                 <NavLink
-                  className={({ isActive }) => (isActive ? 'font-bold dark:text-slate-700' : 'dark:text-slate-700')}
-                  to="/">
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'font-bold dark:text-slate-700 dark:hover:text-white'
+                      : 'dark:text-slate-700 dark:hover:text-white'
+                  }
+                  to="/"
+                >
                   Devices
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  className={({ isActive }) => (isActive ? 'font-bold dark:text-slate-700' : 'dark:text-slate-700')}
-                  to="/add-devices">
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'font-bold dark:text-slate-700 dark:hover:text-white'
+                      : 'dark:text-slate-700 dark:hover:text-white'
+                  }
+                  to="/add-devices"
+                >
                   Add Devices
                 </NavLink>
               </li>
@@ -34,7 +52,8 @@ function App() {
         <section className="p-4">
           <Routes>
             <Route path="/" element={<Devices />} />
-            <Route path="/add-devices" element={<AddDevice />} />
+            <Route path="/add-devices" element={<AddOrEditDevice type="add" />} />
+            <Route path="/edit-device/:id" element={<EditDevicePage />} />
             <Route path="*" element={<FileNotFound />} />
           </Routes>
         </section>
