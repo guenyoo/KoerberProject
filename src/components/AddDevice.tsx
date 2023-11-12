@@ -84,7 +84,8 @@ const AddDevice = () => {
         className="w-full mb-3 p-4 text-xl"
         name="selected"
         value={deviceType}
-        onChange={(e) => setDeviceType(e.target.value)}>
+        onChange={(e) => setDeviceType(e.target.value)}
+      >
         <option value="Smartphone">Smartphone</option>
         <option value="Tablet">Tablet</option>
         <option value="Camera">Camera</option>
