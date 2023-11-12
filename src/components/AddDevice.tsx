@@ -1,9 +1,10 @@
 import { ZodError } from 'zod';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Headline } from './Headline';
 import { createRandomName } from '@/helpers/create-random-name';
 import { DeviceSchema } from './Devices';
 import { devicesStore } from '@/stores/devices-store';
+import { Note } from './Note';
 import he from 'he';
 
 const AddDevice = () => {
@@ -13,12 +14,14 @@ const AddDevice = () => {
   const [ownerName, setOwnerName] = useState<string>('');
   const [batteryStatus, setBatteryStatus] = useState<number>(0);
   const addDevice = devicesStore((state) => state.addDevice);
+  const [showNote, setShowNote] = useState(false);
 
   const resetInputs = () => {
     setDeviceType('Smartphone');
     setDeviceName(createRandomName());
     setOwnerName('');
     setBatteryStatus(0);
+    setShowNote(true);
   };
 
   const verifyAndSendToDb = () => {
@@ -59,6 +62,16 @@ const AddDevice = () => {
       }
     }
   };
+
+  useEffect(() => {
+    // This could be animated nicer with transitions
+    if (showNote) {
+      const timer = setTimeout(() => {
+        setShowNote(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showNote]);
 
   return (
     <div className="text-left">
@@ -118,9 +131,21 @@ const AddDevice = () => {
         onChange={(e) => setBatteryStatus(Number(e.target.value))}
         value={batteryStatus}
       />
-      <button className="bg-green-600" onClick={verifyAndSendToDb}>
+      <button className="bg-green-600 mb-8" onClick={verifyAndSendToDb}>
         Add Device
       </button>
+      {showNote && (
+        <Note
+          className={[
+            'w-2/3 text-center center mx-auto transition',
+            showNote && 'opacity-100',
+            !showNote && 'opacity-0',
+          ].join(' ')}
+          type="success"
+          content="Device wurde erfolgreich hinzugefügt"
+          headline="Heureka!"
+        />
+      )}
     </div>
   );
 };
