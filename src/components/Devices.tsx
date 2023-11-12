@@ -72,6 +72,8 @@ const Devices = ({ className }: DevicesProps) => {
   // TODO: Implement also filtering for i.e. devices that have no more battery
   // or add a searchbar that filters for the supplied name of the Owner
 
+  // TODO: Active States for Sorting Buttons
+
   return (
     <div className={[className, 'relative'].join(' ')}>
       <Headline type="h2" content="Existing Devices" className="font-bold text-2xl mb-4" />
@@ -113,6 +115,7 @@ const Devices = ({ className }: DevicesProps) => {
               ))}
             </div>
             <div className="bg-slate-300 dark:bg-slate-600 w-1/6 absolute top-0 right-0 bottom-0 rounded-r-xl flex flex-wrap justify-center items-center py-2">
+              {/* TODO: Create a new component for these buttons */}
               <button
                 className={['bg-transparent group', selectedDevice?.id === device.id ? 'bg-slate-100' : ''].join(' ')}
                 onClick={() => handleDeviceEdit(device)}
