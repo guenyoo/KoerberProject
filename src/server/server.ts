@@ -1,6 +1,7 @@
 import * as http from 'http';
 import { pool } from './database';
 import { RowDataPacket } from 'mysql2';
+import { ResultSetHeader } from 'mysql2/promise';
 
 const PORT = 3000;
 
@@ -9,6 +10,7 @@ type Response = http.ServerResponse<http.IncomingMessage> & {
 };
 
 const getDevices = (res: Response) => {
+  /* TODO: Implement paging so that the database doesn't fetch more than 20 entries for performance */
   pool.getConnection((error, connection) => {
     if (error) {
       console.error(error);
@@ -59,7 +61,7 @@ const putIntoDB = (req: http.IncomingMessage, res: Response) => {
         }
 
         // Perform the insert operation
-        connection.query('INSERT INTO devices SET ?', newData, (error, results) => {
+        connection.query('INSERT INTO devices SET ?', newData, (error, results: ResultSetHeader | RowDataPacket[]) => {
           // Release the connection back to the pool
           connection.release();
 
@@ -69,12 +71,12 @@ const putIntoDB = (req: http.IncomingMessage, res: Response) => {
             res.end('Internal Server Error');
             return;
           }
-
+          const hasInsertId = 'insertId' in results;
           console.log('Data inserted successfully:', results);
 
           // Send the response only after the database operation is complete
           res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ status: 'ok', data: newData }));
+          res.end(JSON.stringify({ status: 'ok', data: { ...newData, id: hasInsertId && results.insertId } }));
         });
       });
     } catch (error) {
