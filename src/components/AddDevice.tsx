@@ -71,7 +71,7 @@ const AddDevice = () => {
         id="deviceName"
         type="text"
         name="deviceName"
-        className="w-full mb-3 p-2"
+        className="w-full mb-3 p-4 text-xl"
         value={deviceName}
         onChange={(e) => setDeviceName(e.target.value)}
       />
@@ -81,7 +81,7 @@ const AddDevice = () => {
       </label>
       <select
         id="device-type"
-        className="w-full mb-3 p-2"
+        className="w-full mb-3 p-4 text-xl"
         name="selected"
         value={deviceType}
         onChange={(e) => setDeviceType(e.target.value)}>
@@ -97,7 +97,7 @@ const AddDevice = () => {
         id="deviceOwner"
         type="text"
         name="deviceOwner"
-        className="w-full mb-3 p-2"
+        className="w-full mb-3 p-4 text-xl"
         onChange={(e) => setOwnerName(e.target.value)}
         value={ownerName}
       />
@@ -109,7 +109,7 @@ const AddDevice = () => {
         id="deviceOwner"
         type="number"
         name="deviceOwner"
-        className="w-full mb-3 p-2"
+        className="w-full mb-3 p-4 text-xl"
         placeholder="0 ... 100"
         min="0"
         max="100"
