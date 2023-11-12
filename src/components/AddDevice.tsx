@@ -6,37 +6,46 @@ import { DeviceSchema } from './Devices';
 import he from 'he';
 
 const AddDevice = () => {
-  const [selectedDeviceType, setSelectedDeviceType] = useState<string>('Smartphone');
+  const [deviceType, setDeviceType] = useState<string>('Smartphone');
   const generatedRandomName = createRandomName();
-  const [selectedDeviceName, setSelectedDeviceName] = useState<string>(generatedRandomName);
-  const [selectedOwnerName, setSelectedOwnerName] = useState<string>('');
-  const [selectedBatteryStatus, setSelectedBatteryStatus] = useState<number>(0);
+  const [deviceName, setDeviceName] = useState<string>(generatedRandomName);
+  const [ownerName, setOwnerName] = useState<string>('');
+  const [batteryStatus, setBatteryStatus] = useState<number>(0);
 
   const resetInputs = () => {
-    setSelectedDeviceType('Smartphone');
-    setSelectedDeviceName(createRandomName());
-    setSelectedOwnerName('');
-    setSelectedBatteryStatus(0);
+    setDeviceType('Smartphone');
+    setDeviceName(createRandomName());
+    setOwnerName('');
+    setBatteryStatus(0);
   };
 
   const verifyAndSendToDb = () => {
     const escapedInput = {
-      deviceName: selectedDeviceName.length > 0 && he.escape(selectedDeviceName),
-      ownerName: selectedOwnerName.length > 0 && he.escape(selectedOwnerName),
-      batteryStatus:
-        selectedBatteryStatus >= 0 && selectedBatteryStatus <= 100 && !isNaN(selectedBatteryStatus as number)
-          ? selectedBatteryStatus
-          : 0,
-      deviceType: selectedOwnerName.length > 0 && he.escape(selectedDeviceType),
+      deviceName: deviceName.length > 0 && he.escape(deviceName),
+      ownerName: ownerName.length > 0 && he.escape(ownerName),
+      batteryStatus: batteryStatus >= 0 && batteryStatus <= 100 && !isNaN(batteryStatus as number) ? batteryStatus : 0,
+      deviceType: ownerName.length > 0 && he.escape(deviceType),
       id: 0,
     };
 
     try {
       if (DeviceSchema.parse(escapedInput)) {
-        console.log('it parsed!', { selectedDeviceType, selectedBatteryStatus, selectedDeviceName, selectedOwnerName });
-        // TODO: Implement fetch to server
-        // on success:
-        resetInputs();
+        fetch('http://localhost:3000/api/devices/put', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          redirect: 'follow', // manual, *follow, error
+          referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+          body: JSON.stringify({
+            deviceType,
+            batteryStatus,
+            deviceName,
+            ownerName,
+          }),
+        })
+          .then(resetInputs)
+          .catch((e) => console.error(e));
       }
     } catch (error) {
       if (error instanceof ZodError) {
@@ -59,8 +68,8 @@ const AddDevice = () => {
         type="text"
         name="deviceName"
         className="w-full mb-3 p-2"
-        value={selectedDeviceName}
-        onChange={(e) => setSelectedDeviceName(e.target.value)}
+        value={deviceName}
+        onChange={(e) => setDeviceName(e.target.value)}
       />
 
       <label htmlFor="devicyType" className="block font-bold">
@@ -70,8 +79,8 @@ const AddDevice = () => {
         id="device-type"
         className="w-full mb-3 p-2"
         name="selected"
-        value={selectedDeviceType}
-        onChange={(e) => setSelectedDeviceType(e.target.value)}>
+        value={deviceType}
+        onChange={(e) => setDeviceType(e.target.value)}>
         <option value="Smartphone">Smartphone</option>
         <option value="Tablet">Tablet</option>
         <option value="Camera">Camera</option>
@@ -85,8 +94,8 @@ const AddDevice = () => {
         type="text"
         name="deviceOwner"
         className="w-full mb-3 p-2"
-        onChange={(e) => setSelectedOwnerName(e.target.value)}
-        value={selectedOwnerName}
+        onChange={(e) => setOwnerName(e.target.value)}
+        value={ownerName}
       />
 
       <label htmlFor="deviceOwner" className="block font-bold">
@@ -101,8 +110,8 @@ const AddDevice = () => {
         min="0"
         max="100"
         pattern="[0-9]{1,3}"
-        onChange={(e) => setSelectedBatteryStatus(Number(e.target.value))}
-        value={selectedBatteryStatus}
+        onChange={(e) => setBatteryStatus(Number(e.target.value))}
+        value={batteryStatus}
       />
       <button className="bg-green-600" onClick={verifyAndSendToDb}>
         Add Device
