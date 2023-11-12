@@ -17,8 +17,9 @@ I believe docker-compose should be set up correctly but it obviously needs to be
 
 There's a lot of tools I would have loved to use and try, but since this was a Challenge I had to get things done, first.
 
-- I would have loved to write more tests. I would also have loved to setup E2E-Tests with Cypress.
-- I would also have loved to set up a Component Browser like StoryBook. However, the components used were not all that complex and probably overkill in this setup.
+- Would have loved to use Next.js for Server Side Rendering.
+- I would have loved to write (more meaningful) tests. I would also have loved to setup E2E-Tests with Cypress.
+- I would have loved to set up a Component Browser like StoryBook. However, the components used were not all that complex and probably overkill in this setup.
 - Depending on where this project would find its use I would highly recommend implementing some sort of Authorization Logic (like oAuth) so that not everybody has access to the backend and thus the Database.
 - That also means a login/logout page/view.
 - I would have loved to implement some kind of search engine so that database entries would be easier to find.
