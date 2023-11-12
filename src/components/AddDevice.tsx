@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Headline } from './Headline';
 import { createRandomName } from '@/helpers/create-random-name';
 import { DeviceSchema } from './Devices';
+import { devicesStore } from '@/stores/devices-store';
 import he from 'he';
 
 const AddDevice = () => {
@@ -11,6 +12,7 @@ const AddDevice = () => {
   const [deviceName, setDeviceName] = useState<string>(generatedRandomName);
   const [ownerName, setOwnerName] = useState<string>('');
   const [batteryStatus, setBatteryStatus] = useState<number>(0);
+  const addDevice = devicesStore((state) => state.addDevice);
 
   const resetInputs = () => {
     setDeviceType('Smartphone');
@@ -44,6 +46,8 @@ const AddDevice = () => {
             ownerName,
           }),
         })
+          .then((data) => data.json())
+          .then(({ data }) => addDevice(data))
           .then(resetInputs)
           .catch((e) => console.error(e));
       }
