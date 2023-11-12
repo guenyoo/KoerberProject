@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { Headline } from './Headline';
 import { devicesStore } from '@/stores/devices-store';
+import { API } from '@/config/apis';
 
 const DeviceSchema = z.object({
   id: z.number(),
@@ -57,7 +58,7 @@ const Devices = ({ className }: DevicesProps) => {
 
   const handleDeviceDump = (device: Device) => {
     if (window.confirm('Are you sure you want to Delete this Device?')) {
-      fetch('http://localhost:3000/api/devices/delete', {
+      fetch(API.DELETE, {
         method: 'DELETE',
         body: JSON.stringify({ id: device.id }),
       }).then(() => {
