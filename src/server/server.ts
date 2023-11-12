@@ -1,4 +1,4 @@
-import * as http from 'http';
+import { IncomingMessage, ServerResponse, createServer } from 'http';
 import { getDevices } from './methods/get-devices';
 import { addDevice } from './methods/add-device';
 import { updateDevice } from './methods/update-device';
@@ -6,11 +6,11 @@ import { deleteDevice } from './methods/delete-device';
 
 const PORT = 3000;
 
-type Response = http.ServerResponse<http.IncomingMessage> & {
-  req: http.IncomingMessage;
+type Response = ServerResponse<IncomingMessage> & {
+  req: IncomingMessage;
 };
 
-const server = http.createServer(async (req, res) => {
+const server = createServer(async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
