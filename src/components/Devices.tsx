@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { Headline } from './Headline';
@@ -35,10 +36,12 @@ const Devices = ({ className }: DevicesProps) => {
   const setSortBy = devicesStore((state) => state.sortBy);
   const [sortLabel, setSortLabel] = useState('');
   const [sortDirection, setSortDirection] = useState(true);
+  const navigate = useNavigate();
 
   const handleDeviceEdit = (device: Device) => {
     if (selectedDevice && selectedDevice.id === device.id) setSelectedDevice(null);
     else setSelectedDevice(device);
+    navigate(`/edit-device/${device.id}`);
   };
 
   const sortHandler = (label: string) => {
@@ -59,7 +62,8 @@ const Devices = ({ className }: DevicesProps) => {
         body: JSON.stringify({ id: device.id }),
       }).then(() => {
         removeDevice(device);
-        // TODO: Add manual refetch Button
+        // TODO: Add manual refetch Button (would be nice for users to make sure)
+        // even though a reload acomplishes the same, currently
       });
     }
   };
@@ -98,6 +102,7 @@ const Devices = ({ className }: DevicesProps) => {
             key={device.id}
           >
             <div className="w-5/6">
+              {/* also iterate over these */}
               <p className="mb-4">
                 Device Name: <br />
                 <strong>{device.deviceName}</strong>
