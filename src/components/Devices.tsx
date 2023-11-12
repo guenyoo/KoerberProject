@@ -78,50 +78,41 @@ const Devices = ({ className }: DevicesProps) => {
       <div className="flex justify-between items-center mb-4">
         <Headline type="h3" content="Sort items" className="font-bold text-2xl text-left" />
         <ul className="list-none flex gap-2">
-          {/* map over these */}
-          <li>
-            <button onClick={() => sortHandler('batteryStatus')}>By Battery Status</button>
-          </li>
-          <li>
-            <button onClick={() => sortHandler('ownerName')}>By Owner</button>
-          </li>
-          <li>
-            <button onClick={() => sortHandler('deviceName')}>By Name</button>
-          </li>
-          <li>
-            <button onClick={() => sortHandler('deviceType')}>By Type</button>
-          </li>
+          {[
+            { attribute: 'batteryStatus', label: 'By Battery Status' },
+            { attribute: 'ownerName', label: 'By Owner' },
+            { attribute: 'deviceName', label: 'By Name' },
+            { attribute: 'deviceType', label: 'By Type' },
+          ].map((btn, index) => (
+            <li key={index}>
+              <button onClick={() => sortHandler(btn.attribute)}>{btn.label}</button>
+            </li>
+          ))}
         </ul>
       </div>
       <ul className="list-none grid grid-cols-3 gap-4">
         {devices.map((device) => (
           <li
             className={[
-              'text-left bg-lime-200 rounded-xl p-8 dark:border-slate-800 dark:bg-slate-700 shadow-lg relative border border-transparent hover:border-solid dark:hover:border-slate-400',
+              'text-left bg-violet-100 rounded-xl p-8 dark:border-slate-800 dark:bg-slate-700 shadow-lg relative border border-transparent hover:border-solid dark:hover:border-slate-400',
               selectedDevice && selectedDevice?.id !== device.id ? 'opacity-50' : '',
             ].join(' ')}
             key={device.id}
           >
             <div className="w-5/6">
-              {/* also iterate over these */}
-              <p className="mb-4">
-                Device Name: <br />
-                <strong>{device.deviceName}</strong>
-              </p>
-              <p className="mb-4">
-                Device Type: <br />
-                <strong>{device.deviceType}</strong>
-              </p>
-              <p className="mb-4">
-                Owner Name: <br />
-                <strong>{device.ownerName}</strong>
-              </p>
-              <p>
-                BatteryStatus: <br />
-                <strong>{device.batteryStatus} %</strong>
-              </p>
+              {[
+                { attribute: device.deviceName, label: 'Device Name' },
+                { attribute: device.deviceType, label: 'Device Type' },
+                { attribute: device.ownerName, label: 'Owner Name' },
+                { attribute: `${device.batteryStatus} %`, label: 'BatteryStatus' },
+              ].map((btn, index) => (
+                <p className="mb-4" key={index}>
+                  {btn.label}: <br />
+                  <strong>{device.deviceName}</strong>
+                </p>
+              ))}
             </div>
-            <div className="bg-slate-600 w-1/6 absolute top-0 right-0 bottom-0 rounded-r-xl flex flex-wrap justify-center items-center py-2">
+            <div className="bg-slate-300 dark:bg-slate-600 w-1/6 absolute top-0 right-0 bottom-0 rounded-r-xl flex flex-wrap justify-center items-center py-2">
               <button
                 className={['bg-transparent group', selectedDevice?.id === device.id ? 'bg-slate-100' : ''].join(' ')}
                 onClick={() => handleDeviceEdit(device)}
