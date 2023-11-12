@@ -64,14 +64,17 @@ const Devices = ({ className }: DevicesProps) => {
             ].join(' ')}
             key={device.id}>
             <div className="w-5/6">
-              <p>
-                Device Name: <b>{device.deviceName}</b>
+              <p className="mb-4">
+                Device Name: <br />
+                <strong>{device.deviceName}</strong>
+              </p>
+              <p className="mb-4">
+                Owner Name: <br />
+                <strong>{device.ownerName}</strong>
               </p>
               <p>
-                Owner Name: <b>{device.ownerName}</b>
-              </p>
-              <p>
-                BatteryStatus: <b>{device.batteryStatus} %</b>
+                BatteryStatus: <br />
+                <strong>{device.batteryStatus} %</strong>
               </p>
             </div>
             <div className="bg-slate-600 w-1/6 absolute top-0 right-0 bottom-0 rounded-r-xl flex flex-wrap justify-center items-center py-2">
