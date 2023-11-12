@@ -20,9 +20,29 @@ interface DevicesProps {
 const Devices = ({ className }: DevicesProps) => {
   const devices = devicesStore((state) => state.devices);
 
+  // TODO: Implement also filtering for i.e. devices that have no more battery
+  // or add a searchbar that filters for the supplied name of the Owner
+
   return (
     <div className={[className, 'relative'].join(' ')}>
       <Headline type="h2" content="Existing Devices" className="font-bold text-2xl mb-4" />
+      <div className="flex justify-between items-center mb-4">
+        <Headline type="h3" content="Sort items" className="font-bold text-2xl text-left" />
+        <ul className="list-none flex gap-2">
+          <li>
+            <button>By Battery Status</button>
+          </li>
+          <li>
+            <button>By Owner</button>
+          </li>
+          <li>
+            <button>By Name</button>
+          </li>
+          <li>
+            <button>By Type</button>
+          </li>
+        </ul>
+      </div>
       <ul className="list-none grid grid-cols-3 gap-4">
         {devices.map((device) => (
           <li className="text-left bg-lime-200 rounded-xl p-8 dark:bg-slate-700 shadow-lg relative" key={device.id}>
