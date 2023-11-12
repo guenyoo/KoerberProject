@@ -18,6 +18,11 @@ describe('App', () => {
     });
   });
 
+  // This is the only test so far, however I would advise testing these too:
+  // If all information is passed down to the screen (i.e. BatteryStatus etc.)
+  // Interaction, clicks, etc.
+  // The API Services with mock fetch
+  // AddDevices and EditDevices and checking the store afterwards
   it('renders App with Hans Rüdiger as solo Device', () => {
     const app = render(<App />);
     expect(screen.getByText('Hans Rüdiger')).toBeTruthy();
