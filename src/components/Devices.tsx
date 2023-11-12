@@ -29,10 +29,10 @@ const Devices = ({ className }: DevicesProps) => {
 
   return (
     <div className={className}>
-      <Headline type="h2" content="Existing Devices" />
-      <ul className="list-none">
+      <Headline type="h2" content="Existing Devices" className="font-bold text-2xl mb-4" />
+      <ul className="list-none flex flex-wrap gap-4">
         {devices.map((device) => (
-          <li className="text-left bg-slate-100 rounded-xl p-8 dark:bg-slate-800 shadow-lg" key={device.id}>
+          <li className="text-left bg-lime-200 rounded-xl p-8 dark:bg-slate-700 shadow-lg" key={device.id}>
             <div>
               Device Name: <b>{device.deviceName}</b>
             </div>
