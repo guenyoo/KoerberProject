@@ -134,6 +134,59 @@ const deleteFromDb = (req: http.IncomingMessage, res: Response) => {
   });
 };
 
+const updateDb = (req: http.IncomingMessage, res: Response) => {
+  let data = '';
+
+  // Collect data from the request
+  req.on('data', (chunk) => {
+    data += chunk;
+  });
+
+  // Process data when the request is finished
+  req.on('end', () => {
+    try {
+      const newData = JSON.parse(data);
+
+      // Get a connection from the pool
+      pool.getConnection((err, connection) => {
+        if (err) {
+          console.error('Error getting connection:', err);
+          res.writeHead(500, { 'Content-Type': 'text/plain' });
+          res.end('Internal Server Error');
+          return;
+        }
+
+        // Log the SQL query and parameters
+        const columns = Object.keys(newData);
+        const setClause = columns.map((column) => `${column} = ?`).join(', ');
+        const updateQuery = `UPDATE devices SET ${setClause} WHERE id = ?`;
+
+        // Values for the SET clause and WHERE clause
+        const values = [...columns.map((column) => newData[column]), newData.id];
+
+        connection.query(updateQuery, values, (error, results: ResultSetHeader | RowDataPacket[]) => {
+          connection.release();
+
+          if (error) {
+            console.error('Error deleting data:', error);
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end('Internal Server Error');
+            return;
+          }
+
+          // Send the response only after the database operation is complete
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ status: 'ok', data: { ...newData, results } }));
+        });
+      });
+    } catch (error) {
+      console.error('Error parsing JSON:', error);
+      res.writeHead(400, { 'Content-Type': 'text/plain' });
+      res.end('Bad Request');
+    }
+  });
+};
+
 const server = http.createServer(async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -152,6 +205,8 @@ const server = http.createServer(async (req, res) => {
     putIntoDB(req, res);
   } else if (req.method === 'DELETE' && req.url === '/api/devices/delete') {
     deleteFromDb(req, res);
+  } else if (req.method === 'PUT' && req.url === '/api/devices/edit-device') {
+    updateDb(req, res);
   } else {
     // Handle other routes
     res.writeHead(404, { 'Content-Type': 'text/plain' });
