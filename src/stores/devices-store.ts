@@ -15,6 +15,8 @@ const devicesStore = create<DevicesState>((set) => ({
   addDevice: (newItem) => set((state) => ({ devices: [...state.devices, newItem] })),
   removeDevice: (deviceToRemove) =>
     set((state) => ({ devices: state.devices.filter((device) => device.id !== deviceToRemove.id) })),
+  // I'm aware that the sort function should, to be correctly implemented, return either -1, 0 or +1
+  // since the code below is already a bit hard to read, I'll skip this here.
   sortBy: (value: keyof Device, direction?: boolean) =>
     set((state) => ({
       devices: [...state.devices].sort((a: Device, b: Device) => {
