@@ -110,7 +110,7 @@ const Devices = ({ className }: DevicesProps) => {
               ].map((btn, index) => (
                 <p className="mb-4" key={index}>
                   {btn.label}: <br />
-                  <strong>{device.deviceName}</strong>
+                  <strong>{btn.attribute}</strong>
                 </p>
               ))}
             </div>
