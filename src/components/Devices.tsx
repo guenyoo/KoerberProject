@@ -26,18 +26,22 @@ const Devices = ({ className }: DevicesProps) => {
       <ul className="list-none grid grid-cols-3 gap-4">
         {devices.map((device) => (
           <li className="text-left bg-lime-200 rounded-xl p-8 dark:bg-slate-700 shadow-lg relative" key={device.id}>
-            <p>
-              Device Name: <b>{device.deviceName}</b>
-            </p>
-            <p>
-              Owner Name: <b>{device.ownerName}</b>
-            </p>
-            <p>
-              BatteryStatus: <b>{device.batteryStatus} %</b>
-            </p>
-            <button className="absolute top-2 right-2 bg-transparent group">
-              <PencilIcon className="w-4 text-slate-800 group-hover:text-slate-400" />
-            </button>
+            <div className="w-5/6">
+              <p>
+                Device Name: <b>{device.deviceName}</b>
+              </p>
+              <p>
+                Owner Name: <b>{device.ownerName}</b>
+              </p>
+              <p>
+                BatteryStatus: <b>{device.batteryStatus} %</b>
+              </p>
+            </div>
+            <div className="bg-slate-600 w-1/6 absolute top-0 right-0 bottom-0 rounded-r-xl flex justify-center items-start py-2">
+              <button className="bg-transparent group">
+                <PencilIcon className="w-4 text-slate-800 group-hover:text-slate-400" />
+              </button>
+            </div>
           </li>
         ))}
       </ul>
