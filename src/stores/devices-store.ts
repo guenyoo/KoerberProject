@@ -6,12 +6,14 @@ interface DevicesState {
   addDevice: (newItem: Device) => void;
   removeDevice: (deviceToRemove: Device) => void;
   sortBy: (value: keyof Device, direction?: boolean) => void;
+  replaceDevices: (newItems: Device[]) => void;
 }
 
 const devicesStore = create<DevicesState>((set) => ({
   devices: [],
-  addDevice: (newItem: Device) => set((state) => ({ devices: [...state.devices, newItem] })),
-  removeDevice: (deviceToRemove: Device) =>
+  replaceDevices: (newItems) => set(() => ({ devices: newItems })),
+  addDevice: (newItem) => set((state) => ({ devices: [...state.devices, newItem] })),
+  removeDevice: (deviceToRemove) =>
     set((state) => ({ devices: state.devices.filter((device) => device.id !== deviceToRemove.id) })),
   sortBy: (value: keyof Device, direction?: boolean) =>
     set((state) => ({
