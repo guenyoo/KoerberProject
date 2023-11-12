@@ -9,19 +9,28 @@ services:
       - ./src:/usr/src/app/src
     ports:
       - '5173:5173'
+    networks:
+      - network-bridge
   db:
     image: mysql:8.0
     container_name: mysql-container
     restart: always
     environment:
+      HOST_IP: host.docker.internal
       MYSQL_HOST: 'db'
       MYSQL_ROOT_PASSWORD: ''
       MYSQL_DATABASE: devices
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      timeout: 20s
+      retries: 10
     ports:
       - '3306:3306'
     volumes:
       - ./mysql-data:/var/lib/mysql
+    networks:
+      - network-bridge
   http:
     build:
       context: .
@@ -31,13 +40,23 @@ services:
       - ./src:/usr/src/app/src
     ports:
       - '3000:3000'
+    environment:
+      MYSQL_HOST: 'db'
+    networks:
+      - network-bridge
   data-loader:
     image: mysql:8.0
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
       - ./src/server/db/schema:/docker-entrypoint-initdb.d
       - ./src/server/db/data:/docker-entrypoint-initdb.d
 volumes:
   db:
     driver: local
+networks:
+  network-bridge:
+    driver: bridge
