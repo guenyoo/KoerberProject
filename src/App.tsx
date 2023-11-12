@@ -25,8 +25,8 @@ function App() {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? 'font-bold dark:text-slate-700 dark:hover:text-white'
-                      : 'dark:text-slate-700 dark:hover:text-white'
+                      ? 'font-bold hover:text-slate-800 dark:text-slate-700 dark:hover:text-white'
+                      : 'dark:text-slate-700 hover:text-slate-800 dark:hover:text-white'
                   }
                   to="/"
                 >
@@ -37,8 +37,8 @@ function App() {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? 'font-bold dark:text-slate-700 dark:hover:text-white'
-                      : 'dark:text-slate-700 dark:hover:text-white'
+                      ? 'font-bold hover:text-slate-800 dark:text-slate-700 dark:hover:text-white'
+                      : 'dark:text-slate-700 hover:text-slate-800 dark:hover:text-white'
                   }
                   to="/add-devices"
                 >

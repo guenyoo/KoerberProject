@@ -101,7 +101,7 @@ const AddOrEditDevice = ({ type, device }: AddOrEditDeviceProps) => {
         id="deviceName"
         type="text"
         name="deviceName"
-        className="w-full mb-3 p-4 text-xl"
+        className="w-full mb-3 p-4 text-xl bg-slate-100"
         value={deviceName}
         onChange={(e) => setDeviceName(e.target.value)}
       />
@@ -111,7 +111,7 @@ const AddOrEditDevice = ({ type, device }: AddOrEditDeviceProps) => {
       </label>
       <select
         id="device-type"
-        className="w-full mb-3 p-4 text-xl"
+        className="w-full mb-3 p-4 text-xl bg-slate-100"
         name="selected"
         value={deviceType}
         onChange={(e) => setDeviceType(e.target.value as Device['deviceType'])}
@@ -128,7 +128,7 @@ const AddOrEditDevice = ({ type, device }: AddOrEditDeviceProps) => {
         id="deviceOwner"
         type="text"
         name="deviceOwner"
-        className="w-full mb-3 p-4 text-xl"
+        className="w-full mb-3 p-4 text-xl bg-slate-100"
         onChange={(e) => setOwnerName(e.target.value)}
         value={ownerName}
       />
@@ -140,7 +140,7 @@ const AddOrEditDevice = ({ type, device }: AddOrEditDeviceProps) => {
         id="deviceOwner"
         type="number"
         name="deviceOwner"
-        className="w-full mb-3 p-4 text-xl"
+        className="w-full mb-3 p-4 text-xl bg-slate-100"
         placeholder="0 ... 100"
         min="0"
         max="100"
