@@ -20,7 +20,9 @@ interface DevicesProps {
 
 const Devices = ({ className }: DevicesProps) => {
   const devices = devicesStore((state) => state.devices);
+  const removeDevice = devicesStore((state) => state.removeDevice);
   const [selectedDevice, setSelectedDevice] = useState<Device | null>(null);
+  const setSortBy = devicesStore((state) => state.sortBy);
 
   const handleDeviceEdit = (device: Device) => {
     if (selectedDevice && selectedDevice.id === device.id) setSelectedDevice(null);
@@ -33,11 +35,13 @@ const Devices = ({ className }: DevicesProps) => {
         method: 'DELETE',
         body: JSON.stringify({ id: device.id }),
       }).then(() => {
-        // TODO: Cleanup, either get new Devices from Database or filter Store
+        removeDevice(device);
         // TODO: Add manual refetch Button
       });
     }
   };
+
+  console.log(devices);
 
   // TODO: Implement also filtering for i.e. devices that have no more battery
   // or add a searchbar that filters for the supplied name of the Owner
@@ -50,16 +54,16 @@ const Devices = ({ className }: DevicesProps) => {
         <ul className="list-none flex gap-2">
           {/* map over these */}
           <li>
-            <button>By Battery Status</button>
+            <button onClick={() => setSortBy('batteryStatus')}>By Battery Status</button>
           </li>
           <li>
-            <button>By Owner</button>
+            <button onClick={() => setSortBy('ownerName')}>By Owner</button>
           </li>
           <li>
-            <button>By Name</button>
+            <button onClick={() => setSortBy('deviceName')}>By Name</button>
           </li>
           <li>
-            <button>By Type</button>
+            <button onClick={() => setSortBy('deviceType')}>By Type</button>
           </li>
         </ul>
       </div>
