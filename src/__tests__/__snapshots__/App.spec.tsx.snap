@@ -1,394 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`App > renders App 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <header
-        class="text-left dark:bg-slate-500 w-full p-4 text-slate-800 flex justify-between items-center"
-      >
-        <h1
-          class="text-3xl font-bold"
-        >
-          Device Manager
-        </h1>
-        <nav
-          class="flex"
-        >
-          <ul
-            class="list-none flex flex-wrap gap-2"
-          >
-            <li>
-              <a
-                aria-current="page"
-                class="font-bold dark:text-slate-700 dark:hover:text-white"
-                href="/"
-              >
-                Devices
-              </a>
-            </li>
-            <li>
-              <a
-                class="dark:text-slate-700 dark:hover:text-white"
-                href="/add-devices"
-              >
-                Add Devices
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <section
-        class="p-4"
-      >
-        <div
-          class=" relative"
-        >
-          <h2
-            class="font-bold text-2xl mb-4"
-          >
-            Existing Devices
-          </h2>
-          <div
-            class="flex justify-between items-center mb-4"
-          >
-            <h3
-              class="font-bold text-2xl text-left"
-            >
-              Sort items
-            </h3>
-            <ul
-              class="list-none flex gap-2"
-            >
-              <li>
-                <button>
-                  By Battery Status
-                </button>
-              </li>
-              <li>
-                <button>
-                  By Owner
-                </button>
-              </li>
-              <li>
-                <button>
-                  By Name
-                </button>
-              </li>
-              <li>
-                <button>
-                  By Type
-                </button>
-              </li>
-            </ul>
-          </div>
-          <ul
-            class="list-none grid grid-cols-3 gap-4"
-          >
-            <li
-              class="text-left bg-lime-200 rounded-xl p-8 dark:border-slate-800 dark:bg-slate-700 shadow-lg relative border border-transparent hover:border-solid dark:hover:border-slate-400 "
-            >
-              <div
-                class="w-5/6"
-              >
-                <p
-                  class="mb-4"
-                >
-                  Device Name: 
-                  <br />
-                  <strong>
-                    Hans Rüdiger
-                  </strong>
-                </p>
-                <p
-                  class="mb-4"
-                >
-                  Device Type: 
-                  <br />
-                  <strong>
-                    Smartphone
-                  </strong>
-                </p>
-                <p
-                  class="mb-4"
-                >
-                  Owner Name: 
-                  <br />
-                  <strong>
-                    Klaus Herbert
-                  </strong>
-                </p>
-                <p>
-                  BatteryStatus: 
-                  <br />
-                  <strong>
-                    0
-                     %
-                  </strong>
-                </p>
-              </div>
-              <div
-                class="bg-slate-600 w-1/6 absolute top-0 right-0 bottom-0 rounded-r-xl flex flex-wrap justify-center items-center py-2"
-              >
-                <button
-                  class="bg-transparent group "
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="w-4 text-slate-800 group-hover:text-slate-400"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  class="bg-transparent group "
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="w-4 text-slate-800 group-hover:text-slate-400"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
-    </div>
-  </body>,
-  "container": <div>
-    <header
-      class="text-left dark:bg-slate-500 w-full p-4 text-slate-800 flex justify-between items-center"
-    >
-      <h1
-        class="text-3xl font-bold"
-      >
-        Device Manager
-      </h1>
-      <nav
-        class="flex"
-      >
-        <ul
-          class="list-none flex flex-wrap gap-2"
-        >
-          <li>
-            <a
-              aria-current="page"
-              class="font-bold dark:text-slate-700 dark:hover:text-white"
-              href="/"
-            >
-              Devices
-            </a>
-          </li>
-          <li>
-            <a
-              class="dark:text-slate-700 dark:hover:text-white"
-              href="/add-devices"
-            >
-              Add Devices
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <section
-      class="p-4"
-    >
-      <div
-        class=" relative"
-      >
-        <h2
-          class="font-bold text-2xl mb-4"
-        >
-          Existing Devices
-        </h2>
-        <div
-          class="flex justify-between items-center mb-4"
-        >
-          <h3
-            class="font-bold text-2xl text-left"
-          >
-            Sort items
-          </h3>
-          <ul
-            class="list-none flex gap-2"
-          >
-            <li>
-              <button>
-                By Battery Status
-              </button>
-            </li>
-            <li>
-              <button>
-                By Owner
-              </button>
-            </li>
-            <li>
-              <button>
-                By Name
-              </button>
-            </li>
-            <li>
-              <button>
-                By Type
-              </button>
-            </li>
-          </ul>
-        </div>
-        <ul
-          class="list-none grid grid-cols-3 gap-4"
-        >
-          <li
-            class="text-left bg-lime-200 rounded-xl p-8 dark:border-slate-800 dark:bg-slate-700 shadow-lg relative border border-transparent hover:border-solid dark:hover:border-slate-400 "
-          >
-            <div
-              class="w-5/6"
-            >
-              <p
-                class="mb-4"
-              >
-                Device Name: 
-                <br />
-                <strong>
-                  Hans Rüdiger
-                </strong>
-              </p>
-              <p
-                class="mb-4"
-              >
-                Device Type: 
-                <br />
-                <strong>
-                  Smartphone
-                </strong>
-              </p>
-              <p
-                class="mb-4"
-              >
-                Owner Name: 
-                <br />
-                <strong>
-                  Klaus Herbert
-                </strong>
-              </p>
-              <p>
-                BatteryStatus: 
-                <br />
-                <strong>
-                  0
-                   %
-                </strong>
-              </p>
-            </div>
-            <div
-              class="bg-slate-600 w-1/6 absolute top-0 right-0 bottom-0 rounded-r-xl flex flex-wrap justify-center items-center py-2"
-            >
-              <button
-                class="bg-transparent group "
-              >
-                <svg
-                  aria-hidden="true"
-                  class="w-4 text-slate-800 group-hover:text-slate-400"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z"
-                  />
-                </svg>
-              </button>
-              <button
-                class="bg-transparent group "
-              >
-                <svg
-                  aria-hidden="true"
-                  class="w-4 text-slate-800 group-hover:text-slate-400"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    clip-rule="evenodd"
-                    d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z"
-                    fill-rule="evenodd"
-                  />
-                </svg>
-              </button>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
 exports[`App > renders App with Hans Rüdiger as solo Device 1`] = `
 {
   "asFragment": [Function],
@@ -411,7 +22,7 @@ exports[`App > renders App with Hans Rüdiger as solo Device 1`] = `
             <li>
               <a
                 aria-current="page"
-                class="font-bold dark:text-slate-700 dark:hover:text-white"
+                class="font-bold hover:text-slate-800 dark:text-slate-700 dark:hover:text-white"
                 href="/"
               >
                 Devices
@@ -419,7 +30,7 @@ exports[`App > renders App with Hans Rüdiger as solo Device 1`] = `
             </li>
             <li>
               <a
-                class="dark:text-slate-700 dark:hover:text-white"
+                class="dark:text-slate-700 hover:text-slate-800 dark:hover:text-white"
                 href="/add-devices"
               >
                 Add Devices
@@ -476,7 +87,7 @@ exports[`App > renders App with Hans Rüdiger as solo Device 1`] = `
             class="list-none grid grid-cols-3 gap-4"
           >
             <li
-              class="text-left bg-lime-200 rounded-xl p-8 dark:border-slate-800 dark:bg-slate-700 shadow-lg relative border border-transparent hover:border-solid dark:hover:border-slate-400 "
+              class="text-left bg-violet-100 rounded-xl p-8 dark:border-slate-800 dark:bg-slate-700 shadow-lg relative border border-transparent hover:border-solid dark:hover:border-slate-400 "
             >
               <div
                 class="w-5/6"
@@ -484,7 +95,8 @@ exports[`App > renders App with Hans Rüdiger as solo Device 1`] = `
                 <p
                   class="mb-4"
                 >
-                  Device Name: 
+                  Device Name
+                  : 
                   <br />
                   <strong>
                     Hans Rüdiger
@@ -493,7 +105,8 @@ exports[`App > renders App with Hans Rüdiger as solo Device 1`] = `
                 <p
                   class="mb-4"
                 >
-                  Device Type: 
+                  Device Type
+                  : 
                   <br />
                   <strong>
                     Smartphone
@@ -502,23 +115,26 @@ exports[`App > renders App with Hans Rüdiger as solo Device 1`] = `
                 <p
                   class="mb-4"
                 >
-                  Owner Name: 
+                  Owner Name
+                  : 
                   <br />
                   <strong>
                     Klaus Herbert
                   </strong>
                 </p>
-                <p>
-                  BatteryStatus: 
+                <p
+                  class="mb-4"
+                >
+                  BatteryStatus
+                  : 
                   <br />
                   <strong>
-                    0
-                     %
+                    0 %
                   </strong>
                 </p>
               </div>
               <div
-                class="bg-slate-600 w-1/6 absolute top-0 right-0 bottom-0 rounded-r-xl flex flex-wrap justify-center items-center py-2"
+                class="bg-slate-300 dark:bg-slate-600 w-1/6 absolute top-0 right-0 bottom-0 rounded-r-xl flex flex-wrap justify-center items-center py-2"
               >
                 <button
                   class="bg-transparent group "
@@ -577,7 +193,7 @@ exports[`App > renders App with Hans Rüdiger as solo Device 1`] = `
           <li>
             <a
               aria-current="page"
-              class="font-bold dark:text-slate-700 dark:hover:text-white"
+              class="font-bold hover:text-slate-800 dark:text-slate-700 dark:hover:text-white"
               href="/"
             >
               Devices
@@ -585,7 +201,7 @@ exports[`App > renders App with Hans Rüdiger as solo Device 1`] = `
           </li>
           <li>
             <a
-              class="dark:text-slate-700 dark:hover:text-white"
+              class="dark:text-slate-700 hover:text-slate-800 dark:hover:text-white"
               href="/add-devices"
             >
               Add Devices
@@ -642,7 +258,7 @@ exports[`App > renders App with Hans Rüdiger as solo Device 1`] = `
           class="list-none grid grid-cols-3 gap-4"
         >
           <li
-            class="text-left bg-lime-200 rounded-xl p-8 dark:border-slate-800 dark:bg-slate-700 shadow-lg relative border border-transparent hover:border-solid dark:hover:border-slate-400 "
+            class="text-left bg-violet-100 rounded-xl p-8 dark:border-slate-800 dark:bg-slate-700 shadow-lg relative border border-transparent hover:border-solid dark:hover:border-slate-400 "
           >
             <div
               class="w-5/6"
@@ -650,7 +266,8 @@ exports[`App > renders App with Hans Rüdiger as solo Device 1`] = `
               <p
                 class="mb-4"
               >
-                Device Name: 
+                Device Name
+                : 
                 <br />
                 <strong>
                   Hans Rüdiger
@@ -659,7 +276,8 @@ exports[`App > renders App with Hans Rüdiger as solo Device 1`] = `
               <p
                 class="mb-4"
               >
-                Device Type: 
+                Device Type
+                : 
                 <br />
                 <strong>
                   Smartphone
@@ -668,23 +286,26 @@ exports[`App > renders App with Hans Rüdiger as solo Device 1`] = `
               <p
                 class="mb-4"
               >
-                Owner Name: 
+                Owner Name
+                : 
                 <br />
                 <strong>
                   Klaus Herbert
                 </strong>
               </p>
-              <p>
-                BatteryStatus: 
+              <p
+                class="mb-4"
+              >
+                BatteryStatus
+                : 
                 <br />
                 <strong>
-                  0
-                   %
+                  0 %
                 </strong>
               </p>
             </div>
             <div
-              class="bg-slate-600 w-1/6 absolute top-0 right-0 bottom-0 rounded-r-xl flex flex-wrap justify-center items-center py-2"
+              class="bg-slate-300 dark:bg-slate-600 w-1/6 absolute top-0 right-0 bottom-0 rounded-r-xl flex flex-wrap justify-center items-center py-2"
             >
               <button
                 class="bg-transparent group "
