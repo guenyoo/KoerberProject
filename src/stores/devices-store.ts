@@ -5,7 +5,7 @@ interface DevicesState {
   devices: Device[];
   addDevice: (newItem: Device) => void;
   removeDevice: (deviceToRemove: Device) => void;
-  sortBy: (value: keyof Device) => void;
+  sortBy: (value: keyof Device, direction?: boolean) => void;
 }
 
 const devicesStore = create<DevicesState>((set) => ({
@@ -13,15 +13,20 @@ const devicesStore = create<DevicesState>((set) => ({
   addDevice: (newItem: Device) => set((state) => ({ devices: [...state.devices, newItem] })),
   removeDevice: (deviceToRemove: Device) =>
     set((state) => ({ devices: state.devices.filter((device) => device.id !== deviceToRemove.id) })),
-  sortBy: (value: keyof Device) =>
+  sortBy: (value: keyof Device, direction?: boolean) =>
     set((state) => ({
       devices: [...state.devices].sort((a: Device, b: Device) => {
         if (typeof a[value] === 'string' && typeof b[value] === 'string')
-          return (a[value] as string).localeCompare(b[value] as string, undefined, {
-            numeric: true,
-            sensitivity: 'base',
-          });
-        if (typeof a[value] === 'number' && typeof b[value] === 'number') return Number(a[value]) - Number(b[value]);
+          return (direction ? (b[value] as string) : (a[value] as string)).localeCompare(
+            direction ? (a[value] as string) : (b[value] as string),
+            undefined,
+            {
+              numeric: true,
+              sensitivity: 'base',
+            },
+          );
+        if (typeof a[value] === 'number' && typeof b[value] === 'number')
+          return Number(direction ? b[value] : a[value]) - Number(direction ? a[value] : b[value]);
         return 0;
       }),
     })),
