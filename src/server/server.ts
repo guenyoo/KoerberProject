@@ -22,6 +22,7 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // I explicitly didn't use express because I wanted to do it without a framework for once.
   if (req.url === '/api/devices' && req.method === 'GET') {
     getDevices(res);
   } else if (req.method === 'POST' && req.url === '/api/devices/put') {
