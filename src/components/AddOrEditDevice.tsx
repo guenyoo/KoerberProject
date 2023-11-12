@@ -5,6 +5,7 @@ import { createRandomName } from '@/helpers/create-random-name';
 import { type Device, DeviceSchema } from './Devices';
 import { devicesStore } from '@/stores/devices-store';
 import { Note } from './Note';
+import { API } from '@/config/apis';
 import he from 'he';
 
 interface AddOrEditDeviceProps {
@@ -13,15 +14,15 @@ interface AddOrEditDeviceProps {
 }
 
 const AddOrEditDevice = ({ type, device }: AddOrEditDeviceProps) => {
-  const [deviceType, setDeviceType] = useState<string>(device?.deviceType || 'Smartphone');
+  const [deviceType, setDeviceType] = useState<Device['deviceType']>(device?.deviceType || 'Smartphone');
   const generatedRandomName = createRandomName();
   const [deviceName, setDeviceName] = useState<string>(device?.deviceName || generatedRandomName);
   const [ownerName, setOwnerName] = useState<string>(device?.ownerName || '');
   const [batteryStatus, setBatteryStatus] = useState<number>(device?.batteryStatus || 0);
   const addDevice = devicesStore((state) => state.addDevice);
+  const replaceDevices = devicesStore((state) => state.replaceDevices);
+  const devices = devicesStore((state) => state.devices);
   const [showNote, setShowNote] = useState(false);
-
-  console.log(device);
 
   const resetInputs = () => {
     setDeviceType('Smartphone');
@@ -42,8 +43,8 @@ const AddOrEditDevice = ({ type, device }: AddOrEditDeviceProps) => {
 
     try {
       if (DeviceSchema.parse(escapedInput)) {
-        fetch('http://localhost:3000/api/devices/put', {
-          method: 'POST',
+        fetch(type === 'add' ? API.ADD : API.PUT, {
+          method: type === 'add' ? 'POST' : 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -54,11 +55,20 @@ const AddOrEditDevice = ({ type, device }: AddOrEditDeviceProps) => {
             batteryStatus,
             deviceName,
             ownerName,
+            ...(type === 'edit' ? { id: device?.id } : null),
           }),
         })
           .then((data) => data.json())
           .then(({ data }) => addDevice(data))
-          .then(resetInputs)
+          .then(() => {
+            if (type === 'edit') {
+              const oldDevice = devices.find((oldDevice: Device) => oldDevice.id === device!.id) as Device;
+              const newDevice = { ...oldDevice, deviceType, batteryStatus, deviceName, ownerName };
+              const devicesWithoutOldOne = devices.filter((oldDevice: Device) => oldDevice.id !== device!.id);
+              replaceDevices([...devicesWithoutOldOne, newDevice]);
+            }
+            resetInputs();
+          })
           .catch((e) => console.error(e));
       }
     } catch (error) {
@@ -68,10 +78,6 @@ const AddOrEditDevice = ({ type, device }: AddOrEditDeviceProps) => {
         alert(`Bitte überprüfen Sie folgende Felder: \n${errorFields.join(' \n')}`);
       }
     }
-  };
-
-  const verifyAndEditDevice = () => {
-    console.log('verifyAndEditDevice');
   };
 
   useEffect(() => {
@@ -108,7 +114,7 @@ const AddOrEditDevice = ({ type, device }: AddOrEditDeviceProps) => {
         className="w-full mb-3 p-4 text-xl"
         name="selected"
         value={deviceType}
-        onChange={(e) => setDeviceType(e.target.value)}
+        onChange={(e) => setDeviceType(e.target.value as Device['deviceType'])}
       >
         <option value="Smartphone">Smartphone</option>
         <option value="Tablet">Tablet</option>
@@ -142,16 +148,12 @@ const AddOrEditDevice = ({ type, device }: AddOrEditDeviceProps) => {
         onChange={(e) => setBatteryStatus(Number(e.target.value))}
         value={batteryStatus}
       />
-      {type === 'add' && (
-        <button className="bg-green-600 mb-8" onClick={verifyAndSendToDb}>
-          Add Device
-        </button>
-      )}
-      {type === 'edit' && (
-        <button className="bg-yellow-600 mb-8" onClick={verifyAndEditDevice}>
-          Update Device
-        </button>
-      )}
+      <button
+        className={[type === 'edit' ? 'bg-orange-400' : 'bg-green-600', 'mb-8'].join(' ')}
+        onClick={verifyAndSendToDb}
+      >
+        {type === 'edit' ? 'Update' : 'Add'} Device
+      </button>
       {showNote && ( // TODO: Would be nice to add warning and errors here too
         <Note
           className={[
