@@ -72,7 +72,6 @@ const putIntoDB = (req: http.IncomingMessage, res: Response) => {
             return;
           }
           const hasInsertId = 'insertId' in results;
-          console.log('Data inserted successfully:', results);
 
           // Send the response only after the database operation is complete
           res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -87,8 +86,55 @@ const putIntoDB = (req: http.IncomingMessage, res: Response) => {
   });
 };
 
+const deleteFromDb = (req: http.IncomingMessage, res: Response) => {
+  let data = '';
+
+  // Collect data from the request
+  req.on('data', (chunk) => {
+    data += chunk;
+  });
+
+  // Process data when the request is finished
+  req.on('end', () => {
+    try {
+      const newData = JSON.parse(data);
+
+      // Get a connection from the pool
+      pool.getConnection((err, connection) => {
+        if (err) {
+          console.error('Error getting connection:', err);
+          res.writeHead(500, { 'Content-Type': 'text/plain' });
+          res.end('Internal Server Error');
+          return;
+        }
+
+        // Log the SQL query and parameters
+        const sql = 'DELETE FROM devices WHERE id = ?';
+
+        connection.query(sql, [newData.id], (error, results: ResultSetHeader | RowDataPacket[]) => {
+          connection.release();
+
+          if (error) {
+            console.error('Error deleting data:', error);
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end('Internal Server Error');
+            return;
+          }
+
+          // Send the response only after the database operation is complete
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ status: 'ok', data: { ...newData, results } }));
+        });
+      });
+    } catch (error) {
+      console.error('Error parsing JSON:', error);
+      res.writeHead(400, { 'Content-Type': 'text/plain' });
+      res.end('Bad Request');
+    }
+  });
+};
+
 const server = http.createServer(async (req, res) => {
-  console.log(req.headers.host);
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -101,10 +147,11 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (req.url === '/api/devices' && req.method === 'GET') {
-    console.log('getDevices');
     getDevices(res);
   } else if (req.method === 'POST' && req.url === '/api/devices/put') {
     putIntoDB(req, res);
+  } else if (req.method === 'DELETE' && req.url === '/api/devices/delete') {
+    deleteFromDb(req, res);
   } else {
     // Handle other routes
     res.writeHead(404, { 'Content-Type': 'text/plain' });
