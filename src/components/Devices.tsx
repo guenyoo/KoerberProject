@@ -59,7 +59,7 @@ const Devices = ({ className }: DevicesProps) => {
         {devices.map((device) => (
           <li
             className={[
-              'text-left bg-lime-200 rounded-xl p-8 dark:bg-slate-700 shadow-lg relative',
+              'text-left bg-lime-200 rounded-xl p-8 dark:border-slate-800 dark:bg-slate-700 shadow-lg relative border border-transparent hover:border-solid dark:hover:border-slate-400',
               selectedDevice && selectedDevice?.id !== device.id ? 'opacity-50' : '',
             ].join(' ')}
             key={device.id}>
