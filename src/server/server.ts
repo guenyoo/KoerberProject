@@ -23,6 +23,7 @@ const server = createServer(async (req, res) => {
   }
 
   // I explicitly didn't use express because I wanted to do it without a framework for once.
+  // also every request should be checked for schema validity and escape malicious input
   if (req.url === '/api/devices' && req.method === 'GET') {
     getDevices(res);
   } else if (req.method === 'POST' && req.url === '/api/devices/add') {
