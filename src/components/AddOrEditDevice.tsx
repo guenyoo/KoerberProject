@@ -69,6 +69,10 @@ const AddOrEditDevice = ({ type, device }: AddOrEditDeviceProps) => {
             }
             resetInputs();
           })
+          // TODO: Here, but also generally, a good Error Handling should be implemented to let the user know what's up
+          // This also applies to the backend to send more meaningful messages back so that the frontend can use it better
+          // Here, if an error happens, it's probably not because of a schema mismatch (I already handle that case) but
+          // We could implement refetching after a while, log a message to the user that something went wrong, display a status code, etc.
           .catch((e) => console.error(e));
       }
     } catch (error) {
